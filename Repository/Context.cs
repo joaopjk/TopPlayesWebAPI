@@ -9,6 +9,7 @@ namespace Repository
     public class Context : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<Chat> Chats { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder
@@ -18,6 +19,7 @@ namespace Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<Chat>().ToTable("Chat");
 
         }
     }

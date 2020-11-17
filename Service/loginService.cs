@@ -4,14 +4,20 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Repository;
+using Repository.Interface;
 
 namespace Service
 {
     public class loginService : IloginService
     {
+        private IUserRepository _repo;
+        public loginService(IUserRepository repo)
+        {
+            _repo = repo;
+        }
         public ActionResult<dynamic> Authenticate(User user)
         {
-            var usuario = UserRepository.Get(user.Username, user.Password);
+            var usuario = _repo.Get(user.Username, user.Password);
 
             // Verifica se o usuário existe
             if (usuario == null)
@@ -26,13 +32,6 @@ namespace Service
             user.Password = "";
 
             return token;
-            //// Retorna os dados
-            //return new
-            //{
-            //    usuario = user,
-            //    token = token
-            //};
-
         }
     }
 }
