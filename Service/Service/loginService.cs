@@ -1,11 +1,7 @@
 ﻿using Dto;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
-using Repository;
 using Repository.Interface;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
