@@ -11,5 +11,7 @@ namespace Service
     {
         Task<IActionResult> Authenticate(User user);
         Task<IActionResult> Create(User user);
+        Task<IActionResult> Update(User user);
+        Task<IActionResult> Delete(User user);
     }
 }

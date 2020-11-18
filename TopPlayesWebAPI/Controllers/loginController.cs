@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Dto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Service;
 
@@ -27,6 +23,16 @@ namespace TopPlayesWebAPI.Controllers
         public async Task<IActionResult> Create([FromBody] User user)
         {
             return await _service.Create(user);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] User user)
+        {
+            return await _service.Delete(user);
+        }
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] User user)
+        {
+            return await _service.Update(user);
         }
     }
 }

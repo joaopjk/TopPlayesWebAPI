@@ -46,5 +46,19 @@ namespace Repository
         {
             _context.Update(entity);
         }
+
+        public int GetMaxId()
+        {
+             int MaxId = _context.Users.Select(p => p.Id).DefaultIfEmpty(0).Max();
+            return MaxId;
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            IQueryable<User> query = _context.Users;
+            query = query.AsNoTracking()
+                .Where(u => u.Email == email);
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

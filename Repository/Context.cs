@@ -10,6 +10,7 @@ namespace Repository
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Chat> Chats { get; set; }
+        public DbSet<Perfil> Perfils { get; set; }
         public Context(DbContextOptions<Context> options) : base (options)
         {
 
@@ -24,6 +25,7 @@ namespace Repository
         {
             modelBuilder.Entity<User>().ToTable("User");
             modelBuilder.Entity<Chat>().ToTable("Chat");
+            modelBuilder.Entity<Perfil>().ToTable("Perfil");
 
         }
     }

@@ -73,6 +73,7 @@ namespace TopPlayesWebAPI
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IChatRepository, ChatRepository>();
             services.AddScoped<IchatService, chatService>();
+            services.AddScoped<IGoogleSeach, GoogleSeach>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

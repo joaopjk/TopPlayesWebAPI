@@ -4,16 +4,15 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Repository.Interface
+namespace Repository.Repositorio
 {
-    public interface IUserRepository
+    public interface IPerfilRepository
     {
         void Add<T>(T entity) where T : class;
         void Update<T>(T entity) where T : class;
         void Delete<T>(T entity) where T : class;
         Task<bool> SaveChangesAsync();
-        Task<User> Get(string username, string password);
-        Task<User> GetUserByEmail(string email);
+        Task<Perfil> GetUserByUsername(string username);
         int GetMaxId();
     }
 }
