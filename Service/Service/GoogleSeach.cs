@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Dto;
+using Microsoft.AspNetCore.Http;
 
 namespace Service.Service
 {
@@ -17,24 +21,32 @@ namespace Service.Service
         }
         public async Task<IActionResult> Search(string busca)
         {
-            string body = "",pagina = $"https://google-search3.p.rapidapi.com/api/v1/search/q="+ busca+"&num=10";
-            var client = new HttpClient();
-            var request = new HttpRequestMessage
+            try
             {
-                Method = HttpMethod.Get,
-                RequestUri = new Uri(pagina),
-                Headers =
+                string body = "", pagina = $"https://google-search3.p.rapidapi.com/api/v1/search/q=" + busca + "&num=10";
+                var client = new HttpClient();
+                var request = new HttpRequestMessage
+                {
+                    Method = HttpMethod.Get,
+                    RequestUri = new Uri(pagina),
+                    Headers =
                             {
-                                { "x-rapidapi-key", "fa2bb285a6msh9f47e7925b1a897p1adef7jsnd2643f5f0dbb" },
+                                { "x-rapidapi-key", "fa2bb285a6msh9f47e7925b1aaUoMUyT56MQukAn6oZKLfo7SN3aJTvb" },
                                 { "x-rapidapi-host", "google-search3.p.rapidapi.com" },
                             },
-            };
-            using (var response = await client.SendAsync(request))
-            {
-                response.EnsureSuccessStatusCode();
-                body = await response.Content.ReadAsStringAsync();
+                };
+                using (var response = await client.SendAsync(request))
+                {
+                    response.EnsureSuccessStatusCode();
+                    body = await response.Content.ReadAsStringAsync();
+                }
+                var jsonString = JsonSerializer.Deserialize<ResultadosGoogle>(body);
+                return Ok(jsonString);
             }
-            return Ok(body);
+            catch (Exception)
+            {
+                return this.StatusCode(StatusCodes.Status400BadRequest);
+            }         
         }
     }
 }
