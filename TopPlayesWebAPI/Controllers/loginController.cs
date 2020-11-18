@@ -19,9 +19,14 @@ namespace TopPlayesWebAPI.Controllers
             this._service = Service; 
         }
         [HttpPost]
-        public ActionResult<dynamic> Authenticate([FromBody]User user)
+        public async Task<IActionResult> Authenticate([FromBody]User user)
         {
-            return _service.Authenticate(user);
+            return await _service.Authenticate(user);
+        }
+        [HttpPost("create")]
+        public async Task<IActionResult> Create([FromBody] User user)
+        {
+            return await _service.Create(user);
         }
     }
 }

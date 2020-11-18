@@ -27,8 +27,14 @@ namespace Repository.Repositorio
             IQueryable<Chat> query = _context.Chats;
             query = query.AsNoTracking()
                 .Where(u => u.IdUsuario == IdUsuario)
-                .Where(p => p.IdRemetente == IdRemetente);
+                .Where(p => p.IdRemetente == IdRemetente)
+                .OrderBy(o => o.Horario);
             return await query.ToArrayAsync();
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await(_context.SaveChangesAsync()) > 0;
         }
     }
 }

@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Service
 {
     public interface IloginService
     {
-        ActionResult<dynamic> Authenticate(User user);
+        Task<IActionResult> Authenticate(User user);
+        Task<IActionResult> Create(User user);
     }
 }
